@@ -15,7 +15,6 @@
 | **The program recognizes who is the winner** | Winner X click |  The winner is player X |
 | **The program recognizes who is the winner** | Winner O click |  The winner is player O |
 | **The program recognizes if there is a tie** | Last click on full grid |  It's a tie |
-|
 
 
 ## Setup/Installation Requirements
