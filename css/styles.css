@@ -23,7 +23,7 @@ h1 {
   border-radius: 20px;
   padding: 85px;
   text-align: center;
-  background-color: black;
+  background-color: #212529;
   color: white;
 }
 
@@ -45,23 +45,3 @@ h1 {
   color: red;
   font-weight: bold;
 }
-
-/* .col-md-4 {
-  height: 200px;
-}
-
-.row {
-  border-top: 1px solid grey;
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-
-}
-
-#thirdXrow {
-  border-bottom: 1px solid grey;
-}
-
-#y2, #y5, #y8 {
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-} */

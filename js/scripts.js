@@ -63,24 +63,63 @@ Board.prototype.initializeBoard = function() {
   }
 }
 
+// function valueTracker (track) {
+//   if (track[0].value === track[1].value && track[0].value === track[2].value && track[1].value === track[2].value && track[0].value !== EMPTY) {
+//     return track[0].value;
+//   }
+//   return false
+// }
+
 Board.prototype.hasWon = function() {
+
+//Rows
   var row1 = this.spaces.slice(0, 3);
   console.log(row1);
-  if (row1[0].value === row1[1].value && row1[0].value === row1[2].value && row1[1].value === row1[2].value) {
+  if (row1[0].value === row1[1].value && row1[0].value === row1[2].value && row1[1].value === row1[2].value && row1[0].value !== EMPTY) {
     return row1[0].value;
   }
 
   var row2 = this.spaces.slice(3, 6);
   console.log(row2);
-  if (row2[0].value === row2[1].value && row2[0].value === row2[2].value && row2[1].value === row2[2].value) {
+  if (row2[0].value === row2[1].value && row2[0].value === row2[2].value && row2[1].value === row2[2].value && row2[0].value !== EMPTY) {
     return row2[0].value;
   }
 
   var row3 = this.spaces.slice(6, 9);
   console.log(row3);
-  if (row3[0].value === row3[1].value && row3[0].value === row3[2].value && row3[1].value === row3[2].value) {
+  if (row3[0].value === row3[1].value && row3[0].value === row3[2].value && row3[1].value === row3[2].value && row3[0].value !== EMPTY) {
     return row3[0].value;
   }
+
+//Columns
+  var column1 = [this.spaces[0], this.spaces[3], this.spaces[6]];
+  console.log('col1', column1);
+  if (column1[0].value === column1[1].value && column1[0].value === column1[2].value && column1[1].value === column1[2].value && column1[0].value !== EMPTY) {
+    return column1[0].value;
+  }
+
+  var column2 = [this.spaces[1], this.spaces[4], this.spaces[7]];
+  console.log('col2',column2);
+  if (column2[0].value === column2[1].value && column2[0].value === column2[2].value && column2[1].value === column2[2].value && column2[0].value !== EMPTY) {
+    return column2[0].value;
+  }
+
+  var column3 = [this.spaces[2], this.spaces[5], this.spaces[8]];
+  console.log('col3',column3);
+    if (column3[0].value === column3[1].value && column3[0].value === column3[2].value && column3[1].value === column3[2].value && column3[0].value !== EMPTY) {
+    return column3[0].value;
+  }
+//Diagonals
+  var diagonal1 = [this.spaces[0], this.spaces[4], this.spaces[8]];
+    if (diagonal1[0].value === diagonal1[1].value && diagonal1[0].value === diagonal1[2].value && diagonal1[1].value === diagonal1[2].value && diagonal1[0].value !== EMPTY) {
+    return diagonal1[0].value;
+  }
+
+  var diagonal2 = [this.spaces[2], this.spaces[4], this.spaces[6]];
+    if (diagonal2[0].value === diagonal2[1].value && diagonal2[0].value === diagonal2[2].value && diagonal2[1].value === diagonal2[2].value && diagonal2[0].value !== EMPTY) {
+    return diagonal2[0].value;
+  }
+
   return false;
 
 }
@@ -254,4 +293,11 @@ $(document).ready(function() {
       }
     }
   });
+  $("#startOver").click(function () {
+    $("#start").fadeIn();
+    $(".grid-item").text("");
+    $("#result").hide();
+    $("#gameDisplay").hide();
+
+  })
 });
