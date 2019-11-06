@@ -8,13 +8,13 @@
 
 | Spec | Input | Output |
 | :----------- | :----------------------| :----------- |
-| **Homepage   | User accesses homepage | Homepage with start button |
-| **Homepage | User clicks start | Game box appears |
-| **By default, the user X starts first. | User clicks in any square | X |
-| **After the user X clicks ona  square, the second user can play | User clicks in any square | O |
-| **The program recognizes who is the winner | Winner X click |  The winner is player X |
-| **The program recognizes who is the winner | Winner O click |  The winner is player O |
-| **The program recognizes if there is a tie | Last click on full grid |  It's a tie |
+| **Homepage**   | User accesses homepage | Homepage with start button |
+| **Homepage** | User clicks start | Game box appears |
+| **By default, the user X starts first** | User clicks in any square | X |
+| **After the user X clicks ona  square, the second user can play** | User clicks in any square | O |
+| **The program recognizes who is the winner** | Winner X click |  The winner is player X |
+| **The program recognizes who is the winner** | Winner O click |  The winner is player O |
+| **The program recognizes if there is a tie** | Last click on full grid |  It's a tie |
 |
 
 
