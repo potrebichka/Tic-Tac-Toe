@@ -14,7 +14,6 @@ h1 {
   display: inline-grid;
   grid-template-columns: 200px 200px 200px;
   grid-template-rows: 200px 200px 200px;
-
 }
 
 .grid-item {
@@ -31,7 +30,6 @@ h1 {
 .jumbotron {
   border-radius: 20px;
   margin-top: 50px;
-
 }
 
 #gameDisplay {
