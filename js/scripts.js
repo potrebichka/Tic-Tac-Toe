@@ -1,21 +1,16 @@
+//Global variables.
 var EMPTY = "Empty";
 var X = "X";
 var O = "O";
 
-function Player(type) {
-  this.type = type
-}
-
-Player.prototype.mark = function() {
-  return this.type
-}
-
+//Constructor the Space box.
 function Space (xCoordinate, yCoordinate) {
   this.X = xCoordinate,
   this.Y = yCoordinate,
   this.value = EMPTY
 }
 
+//Method for the constructor Space.
 Space.prototype.isEmpty = function() {
   if (this.value === EMPTY) {
     return true;
@@ -23,6 +18,7 @@ Space.prototype.isEmpty = function() {
   return false;
 }
 
+//Method - assigns the Space value.
 Space.prototype.mark = function(value) {
   if (value !== X && value !== O) {
     return false;
@@ -31,27 +27,22 @@ Space.prototype.mark = function(value) {
   return true;
 }
 
-Space.prototype.markedBy = function() {
-  if (this.value === X) {
-    return X;
-  } else if (this.value === O) {
-    return O
-  }
-  return EMPTY;
-}
+// //
+// Space.prototype.markedBy = function() {
+//   if (this.value === X) {
+//     return X;
+//   } else if (this.value === O) {
+//     return O
+//   }
+//   return EMPTY;
+// }
 
-Space.prototype.xCoordinate = function() {
-  return this.X;
-}
-
-Space.prototype.yCoordinate = function() {
-  return this.Y;
-}
-
+//Constructor for Board (full game board). This board contains spaces (Space). Empty array.
 function Board() {
   this.spaces = []
 }
 
+//Method - it's called when the user clicks starts (newGame).
 Board.prototype.initializeBoard = function() {
   var space;
   for (var x=0; x<3; x++) {
@@ -62,6 +53,7 @@ Board.prototype.initializeBoard = function() {
   }
 }
 
+//Method - if isEmpty is false, it pushes 'It's a tie' below with JQuery.
 Board.prototype.checkIfFull = function() {
   for (var i=0; i<this.spaces.length; i++) {
     if (this.spaces[i].isEmpty()) {
@@ -71,6 +63,8 @@ Board.prototype.checkIfFull = function() {
   return true
 }
 
+
+//Function - track is an Array. It could be (see next Method) row, colum or diagonal. Returns value if the spaces value in a row, colum or diagonal match or returns false or they don't.
 function valueTracker (track) {
   if (track[0].value === track[1].value && track[0].value === track[2].value && track[1].value === track[2].value && track[0].value !== EMPTY) {
     return track[0].value;
@@ -78,7 +72,7 @@ function valueTracker (track) {
   return false
 }
 
-
+//Method - determines if a result on a row, colum or diagonal is the winning one. After row1, the following variables will take the row1 result and compare it with the current valueTracker.
 Board.prototype.hasWon = function() {
 
 //Rows
@@ -108,6 +102,7 @@ Board.prototype.hasWon = function() {
   var diagonal2 = [this.spaces[2], this.spaces[4], this.spaces[6]];
   result = result || valueTracker(diagonal2);
 
+//This determines if the board is full and there is no winner.
   if (this.checkIfFull()) {
     if (result) {
       return result
@@ -115,25 +110,21 @@ Board.prototype.hasWon = function() {
       return "Tie"
     }
   }
-
   return result;
 }
 
+//Function - creates a new empty game object/board (no spaces, just an empty array).
 function Game() {
-  this.playerX = new Player("X"),
-  this.playerO = new Player("O"),
   this.board = new Board(),
   this.turn = X
 }
 
+//Method - creates the spaces with EMPTY value.
 Game.prototype.newGame = function() {
   this.board.initializeBoard()
 }
 
-Game.prototype.turn = function () {
-  return this.turn
-}
-
+//Method - X turns to O. And then the turn is reversed.
 Game.prototype.nextTurn = function () {
   if (this.turn === X) {
     this.turn = O
@@ -142,6 +133,7 @@ Game.prototype.nextTurn = function () {
   }
 }
 
+//Method - takes the parameter id (each space has an if). It assigs the space value if it's not empty. It allows the player to click if it's true.
 Game.prototype.move = function(id) {
   var space = this.board.spaces[id-1];
   var player = this.turn;
@@ -153,12 +145,12 @@ Game.prototype.move = function(id) {
   return false
 }
 
-
 $(document).ready(function() {
   var game;
   $("#startButton").click(function () {
     $("#gameDisplay").fadeIn();
     $("#start").hide();
+    $("#player").text(X);
     game = new Game();
     game.newGame();
   });
@@ -188,132 +180,6 @@ $(document).ready(function() {
     }
   });
 
-  // $("#1").click(function (event) {
-  //   console.log(event.target.id);
-  //   var result = game.move(1);
-  //     if (result) {
-  //       $("#1").text(result);
-  //       $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
-
-  // $("#2").click(function () {
-  //   var result = game.move(2);
-  //   if (result) {
-  //     $("#2").text(result);
-  //     $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
-  //
-  // $("#3").click(function () {
-  //   var result = game.move(3);
-  //   if (result) {
-  //     $("#3").text(result);
-  //     $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
-  //
-  // $("#4").click(function () {
-  //   var result = game.move(4);
-  //   if (result) {
-  //     $("#4").text(result);
-  //     $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
-  //
-  // $("#5").click(function () {
-  //   var result = game.move(5);
-  //   if (result) {
-  //     $("#5").text(result);
-  //     $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
-  //
-  // $("#6").click(function () {
-  //   var result = game.move(6);
-  //   if (result) {
-  //     $("#6").text(result);
-  //     $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
-  //
-  // $("#7").click(function () {
-  //   var result = game.move(7);
-  //   if (result) {
-  //     $("#7").text(result);
-  //     $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
-  //
-  // $("#8").click(function () {
-  //   var result = game.move(8);
-  //   if (result) {
-  //     $("#8").text(result);
-  //     $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
-  //
-  // $("#9").click(function () {
-  //   var result = game.move(9);
-  //   if (result) {
-  //     $("#9").text(result);
-  //     $("#player").text(result);
-  //
-  //   var resultCondition = game.board.hasWon();
-  //     if (resultCondition) {
-  //       $("#result").fadeIn();
-  //       $("#winner").text("The winner is player " + resultCondition + "!");
-  //     }
-  //   }
-  // });
   $("#startOver").click(function () {
     $("#start").fadeIn();
     $(".grid-item").text("");
